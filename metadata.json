@@ -1,0 +1,27 @@
+{
+  "source_filename": "social_media_creative_analysis_meigen_optp_flyer_complete(1).xlsx",
+  "source_sha256": "2812e4adae7ff72d1eb3279240ad182769010712e7e59a35138c5943b01dabfa",
+  "record_count": 4057,
+  "worksheet_rows_including_header": 4058,
+  "requested_count": 4058,
+  "count_note": "4,057 source records plus one header; no fabricated extra template",
+  "source_basis": "supplied_workbook_text_only",
+  "schema_version": 1,
+  "selection_order": [
+    "primary_category",
+    "primary_subcategory",
+    "secondary_category",
+    "secondary_subcategory",
+    "content_format",
+    "purpose",
+    "source_style",
+    "colors",
+    "hex_palette",
+    "typography",
+    "layout",
+    "visible_text",
+    "analysis",
+    "reconstruction_prompt",
+    "reusable_prompt"
+  ]
+}

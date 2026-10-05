@@ -1,0 +1,14 @@
+{
+  "positive": [
+    { "id": "P1", "prompt": "What design categories can this plugin use?", "tool": "list_design_categories", "arguments": {}, "expected": "4057 records and real primary categories; no image claims." },
+    { "id": "P2", "prompt": "Find three skincare post structures in Beauty & Cosmetics.", "tool": "search_design_templates", "arguments": { "selection": { "primary_category": "Beauty & Cosmetics" }, "subject": "skincare serum bottle", "output": "post", "limit": 3 }, "expected": "Three category-matched records, ordered filter trace and bounded shortlist." },
+    { "id": "P3", "prompt": "Inspect the complete source data for template IMG-000001.", "tool": "get_design_template", "arguments": { "template_id": "IMG-000001" }, "expected": "All 17 source fields and source provenance, with no claim of viewing absent images." },
+    { "id": "P4", "prompt": "Explain the constraints for a five-slide branded carousel.", "tool": "get_design_guidance", "arguments": { "output": "carousel" }, "expected": "Separate slides, actual assets, color/grid rules and host-rendering limitations." },
+    { "id": "P5", "prompt": "Prepare campaign rules for a different product in the same design family.", "tool": "get_design_guidance", "arguments": { "output": "post", "variation_mode": "different_product" }, "expected": "Real new asset, fresh headlines/main layout, fixed CTA/logo/footer anchors." }
+  ],
+  "negative": [
+    { "id": "N1", "prompt": "Read template IMG-999999.", "tool": "get_design_template", "arguments": { "template_id": "IMG-999999" }, "expected": "Unknown-ID tool error; no fabricated template." },
+    { "id": "N2", "prompt": "Return seven shortlisted templates in one call.", "tool": "search_design_templates", "arguments": { "limit": 7 }, "expected": "Input validation error because shortlist maximum is six." },
+    { "id": "N3", "prompt": "Search an arbitrary URL and publish the design to my account.", "tool": "search_design_templates", "arguments": { "url": "https://example.com/private", "publish": true }, "expected": "Unsupported arguments rejected; no browsing or publishing operation exists." }
+  ]
+}

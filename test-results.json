@@ -1,0 +1,126 @@
+{
+  "tested_at": "2026-10-05T13:21:22.624Z",
+  "endpoint": "http://127.0.0.1:45553/mcp",
+  "scope": "Local MCP tool-level tests; not public deployment or end-to-end ChatGPT image generation.",
+  "cases": [
+    {
+      "id": "P1",
+      "prompt": "What design categories can this plugin use?",
+      "tool": "list_design_categories",
+      "arguments": {},
+      "expected": "4057 records and real primary categories; no image claims.",
+      "passed": true,
+      "observed": {
+        "catalog_count": 4057,
+        "primary_category_count": 62
+      }
+    },
+    {
+      "id": "P2",
+      "prompt": "Find three skincare post structures in Beauty & Cosmetics.",
+      "tool": "search_design_templates",
+      "arguments": {
+        "selection": {
+          "primary_category": "Beauty & Cosmetics"
+        },
+        "subject": "skincare serum bottle",
+        "output": "post",
+        "limit": 3
+      },
+      "expected": "Three category-matched records, ordered filter trace and bounded shortlist.",
+      "passed": true,
+      "observed": {
+        "shortlist_ids": [
+          "IMG-001326",
+          "IMG-001376",
+          "IMG-001386"
+        ]
+      }
+    },
+    {
+      "id": "P3",
+      "prompt": "Inspect the complete source data for template IMG-000001.",
+      "tool": "get_design_template",
+      "arguments": {
+        "template_id": "IMG-000001"
+      },
+      "expected": "All 17 source fields and source provenance, with no claim of viewing absent images.",
+      "passed": true,
+      "observed": {
+        "field_count": 17,
+        "template_id": "IMG-000001"
+      }
+    },
+    {
+      "id": "P4",
+      "prompt": "Explain the constraints for a five-slide branded carousel.",
+      "tool": "get_design_guidance",
+      "arguments": {
+        "output": "carousel"
+      },
+      "expected": "Separate slides, actual assets, color/grid rules and host-rendering limitations.",
+      "passed": true,
+      "observed": {
+        "output": "carousel",
+        "variation_mode": "not_requested",
+        "rendering": "Use the host image-generation tool with actual current assets. If unavailable, disclose a prompt-only fallback; never claim an image was produced."
+      }
+    },
+    {
+      "id": "P5",
+      "prompt": "Prepare campaign rules for a different product in the same design family.",
+      "tool": "get_design_guidance",
+      "arguments": {
+        "output": "post",
+        "variation_mode": "different_product"
+      },
+      "expected": "Real new asset, fresh headlines/main layout, fixed CTA/logo/footer anchors.",
+      "passed": true,
+      "observed": {
+        "output": "post",
+        "variation_mode": "different_product",
+        "rendering": "Use the host image-generation tool with actual current assets. If unavailable, disclose a prompt-only fallback; never claim an image was produced."
+      }
+    },
+    {
+      "id": "N1",
+      "prompt": "Read template IMG-999999.",
+      "tool": "get_design_template",
+      "arguments": {
+        "template_id": "IMG-999999"
+      },
+      "expected": "Unknown-ID tool error; no fabricated template.",
+      "passed": true,
+      "observed": {
+        "error": "Unknown template ID. Use an ID returned by search_design_templates."
+      }
+    },
+    {
+      "id": "N2",
+      "prompt": "Return seven shortlisted templates in one call.",
+      "tool": "search_design_templates",
+      "arguments": {
+        "limit": 7
+      },
+      "expected": "Input validation error because shortlist maximum is six.",
+      "passed": true,
+      "observed": {
+        "error": "MCP error -32602: Input validation error: Invalid arguments for tool search_design_templates: Too big: expected number to be <=6 at limit"
+      }
+    },
+    {
+      "id": "N3",
+      "prompt": "Search an arbitrary URL and publish the design to my account.",
+      "tool": "search_design_templates",
+      "arguments": {
+        "url": "https://example.com/private",
+        "publish": true
+      },
+      "expected": "Unsupported arguments rejected; no browsing or publishing operation exists.",
+      "passed": true,
+      "observed": {
+        "error": "MCP error -32602: Input validation error: Invalid arguments for tool search_design_templates: Unrecognized keys: \"url\", \"publish\""
+      }
+    }
+  ]
+}
